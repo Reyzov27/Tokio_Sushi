@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAKURA SUSHI — japońska restauracja w Łodzi</title>
+  <meta name="description" content="SAKURA SUSHI — świeże sushi i japońska kuchnia w sercu Łodzi. Zamów online lub odwiedź nas przy ul. Piotrkowskiej.">
+  <meta name="theme-color" content="#fbf6ee">
+
+  <!-- Шрифты Google: Cormorant Garamond (заголовки) и Jost (текст) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Японские иероглифы (подгружаются только нужные знаки) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&text=%E3%81%82%E3%81%84%E3%81%86%E3%81%8A%E3%81%8C%E3%81%8D%E3%81%94%E3%81%96%E3%81%99%E3%81%9F%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A8%E3%81%AB%E3%81%BE%E3%82%8A%E3%83%8B%E3%83%9B%E3%83%A0%E3%83%A1%E3%83%A5%E3%83%BC%E4%BC%9D%E5%85%88%E5%8F%B8%E5%93%81%E5%AF%BF%E5%BF%83%E6%96%99%E6%96%B0%E6%97%A5%E6%9B%B8%E6%9C%AC%E6%A1%9C%E7%90%86%E7%9C%9F%E7%A7%81%E7%B5%A1%E7%B5%B1%E9%80%A3%E9%AE%AE%E4%BA%BA%E6%B0%97%E7%89%B9%E5%88%A5&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Цветок сакуры: один раз описан здесь, дальше используется как <use href="#sakura"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="sakura" viewBox="0 0 40 40">
+      <g fill="currentColor"><path transform="rotate(0 20 20)" d="M20 20C14 14 14 6 18 3L20 5.5 22 3C26 6 26 14 20 20Z"/><path transform="rotate(72 20 20)" d="M20 20C14 14 14 6 18 3L20 5.5 22 3C26 6 26 14 20 20Z"/><path transform="rotate(144 20 20)" d="M20 20C14 14 14 6 18 3L20 5.5 22 3C26 6 26 14 20 20Z"/><path transform="rotate(216 20 20)" d="M20 20C14 14 14 6 18 3L20 5.5 22 3C26 6 26 14 20 20Z"/><path transform="rotate(288 20 20)" d="M20 20C14 14 14 6 18 3L20 5.5 22 3C26 6 26 14 20 20Z"/></g>
+      <circle cx="20" cy="20" r="2.2" fill="#fbf6ee"/>
+    </symbol>
+  </svg>
+
+  <!-- ШАПКА И НАВИГАЦИЯ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo"><span class="logo__mark" aria-hidden="true">桜</span>SAKURA SUSHI</a>
+
+      <nav class="nav" id="nav" aria-label="Nawigacja główna">
+        <a href="#home">Strona główna<span class="nav__jp" aria-hidden="true">ホーム</span></a>
+        <a href="#menu">Menu<span class="nav__jp" aria-hidden="true">メニュー</span></a>
+        <a href="#box">Stwórz box<span class="nav__jp" aria-hidden="true">弁当</span></a>
+        <!-- «Акции» видны только в мобильном меню, чтобы не менять шапку на компьютере -->
+        <a href="#offers" class="nav__extra">Oferty<span class="nav__jp" aria-hidden="true">特別</span></a>
+        <a href="#about">O nas<span class="nav__jp" aria-hidden="true">私たち</span></a>
+        <a href="#contacts">Kontakt<span class="nav__jp" aria-hidden="true">連絡先</span></a>
+        <!-- Кнопка звонка: только в мобильном меню -->
+        <a href="tel:+48000000000" class="nav__call">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.7 4.2-2.2 1.4a11 11 0 0 0 5.4 5.4l1.4-2.2L19 14.5V18a1.5 1.5 0 0 1-1.6 1.5A14.5 14.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></svg>
+          Zadzwoń
+        </a>
+        <p class="nav__note">Codziennie 12:00–22:00 · Łódź</p>
+      </nav>
+
+      <div class="header__actions">
+        <button class="lang" id="lang-toggle" type="button" data-lang="pl" aria-label="Język / Language"><span>PL</span><i>|</i><span>EN</span></button>
+        <!-- Кнопка корзины со счётчиком (id остались прежними — на них опирается cart.js) -->
+        <button class="cart-toggle" id="cart-toggle" type="button" aria-label="Otwórz koszyk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 4h2.2l2.1 10.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.4 8H6.1"/>
+            <circle cx="9.5" cy="19.5" r="1.2"/>
+            <circle cx="17" cy="19.5" r="1.2"/>
+          </svg>
+          <span class="cart-count" id="cart-count" hidden>0</span>
+        </button>
+
+        <!-- Бургер: виден только на телефоне и планшете -->
+        <button class="burger" id="burger" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero" id="home">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow"><span class="eyebrow__jp">日本料理</span> Kuchnia japońska</p>
+          <h1>Odkryj <em>sztukę</em> Japonii</h1>
+          <p class="hero__lead">
+            SAKURA SUSHI to kameralna restauracja, w której sushi powstaje codziennie ze świeżej ryby i najlepszego ryżu. Proste smaki, staranna podaż.
+          </p>
+          <div class="hero__actions">
+            <a href="#menu" class="button button--arrow">Zobacz menu
+              <span class="button__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+            <a href="#about" class="link-arrow">Nasza historia</a>
+          </div>
+          <ul class="hero__facts">
+            <li><strong>2020</strong><span>rok otwarcia</span></li>
+            <li><strong>12–22</strong><span>codziennie</span></li>
+            <li><strong>Łódź</strong><span>Piotrkowska 100</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__media">
+          <span class="hero__kanji" aria-hidden="true">寿司</span>
+          <span class="petal petal--1" aria-hidden="true"></span>
+          <span class="petal petal--2" aria-hidden="true"></span>
+          <span class="petal petal--3" aria-hidden="true"></span>
+          <span class="petal petal--4" aria-hidden="true"></span>
+
+          <div class="hero__frame">
+            <img
+              class="hero__image"
+              src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1600&q=85"
+              alt="Asortyment sushi na ciemnym talerzu"
+              width="1600" height="1100" fetchpriority="high">
+          </div>
+
+          <figure class="hero__chip">
+            <img
+              src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80"
+              alt="Nigiri z łososiem z bliska"
+              width="600" height="600" loading="lazy" decoding="async">
+          </figure>
+
+          <div class="hero__seal" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <defs><path id="seal-circle" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs>
+              <text><textPath href="#seal-circle" textLength="270" lengthAdjust="spacing">SAKURA SUSHI • ŚWIEŻO CODZIENNIE • OD 2020 •</textPath></text>
+            </svg>
+            <span class="hero__seal-mark">桜</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Разделитель между главным экраном и меню -->
+    <div class="container">
+      <div class="divider" aria-hidden="true"><span class="divider__line"></span><svg class="divider__flower" aria-hidden="true"><use href="#sakura"/></svg><span class="divider__line"></span></div>
+    </div>
+
+    <!-- ПОПУЛЯРНЫЕ БЛЮДА -->
+    <section class="section popular" id="popular">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--center"><span class="eyebrow__jp">人気</span> Ulubione gości</p>
+          <h2>Najpopularniejsze dania</h2>
+          <p class="section__lead">Dania, które nasi goście zamawiają najczęściej.</p>
+        </div>
+
+        <div class="cards cards--3">
+
+          <article class="card card--popular reveal" data-id="nigiri-salmon" data-price="12" data-category="sushi">
+            <div class="card__photo">
+              <span class="badge">★ Bestseller</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" alt="Nigiri z łososiem">
+            </div>
+            <div class="card__body">
+              <h3>Nigiri z łososiem</h3>
+              <p class="card__text">Delikatny łosoś na poduszce z ciepłego ryżu.</p>
+              <div class="card__bottom">
+                <p class="price">12 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card card--popular reveal" data-id="roll-philadelphia" data-price="38" data-category="rolls">
+            <div class="card__photo">
+              <span class="badge">★ Bestseller</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=800&q=80" alt="Roll Philadelphia">
+            </div>
+            <div class="card__body">
+              <h3>Roll „Philadelphia”</h3>
+              <p class="card__text">Łosoś, serek śmietankowy i świeży ogórek.</p>
+              <div class="card__bottom">
+                <p class="price">38 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card card--popular reveal" data-id="ramen-tonkotsu" data-price="42" data-category="ramen">
+            <div class="card__photo">
+              <span class="badge">★ Bestseller</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80" alt="Ramen tonkotsu">
+            </div>
+            <div class="card__body">
+              <h3>Ramen tonkotsu</h3>
+              <p class="card__text">Intensywny bulion wieprzowy, jajko i makaron.</p>
+              <div class="card__bottom">
+                <p class="price">42 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WYBÓR SZEFA KUCHNI -->
+    <section class="section chef" id="chef">
+      <div class="container chef__grid">
+        <div class="chef__photos reveal">
+          <img class="chef__img chef__img--big" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=900&q=80" alt="Szef kuchni przygotowuje sushi">
+          <img class="chef__img chef__img--small" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=500&q=80" alt="Autorski zestaw szefa kuchni">
+          <span class="chef__kanji" aria-hidden="true">板前</span>
+        </div>
+        <div class="chef__text reveal">
+          <p class="eyebrow"><span class="eyebrow__jp">おまかせ</span> Omakase</p>
+          <h2>Wybór szefa kuchni</h2>
+          <p class="chef__quote">„Zaufaj nam. Każdego ranka układamy trzy propozycje z tego, co najlepsze na rynku.”</p>
+          <ul class="picks">
+            <li class="pick" data-id="omakase-set" data-price="129"><img loading="lazy" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=200&q=80" alt="Zestaw Omakase"><div><h3>Zestaw Omakase</h3><p>12 kawałków wybranych przez szefa kuchni.</p></div><div class="pick__side"><p class="price">129 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></li>
+            <li class="pick" data-id="nigiri-tuna" data-price="14"><img loading="lazy" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=200&q=80" alt="Nigiri z tuńczykiem"><div><h3>Nigiri z tuńczykiem</h3><p>Soczysty tuńczyk z odrobiną wasabi.</p></div><div class="pick__side"><p class="price">14 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></li>
+            <li class="pick" data-id="mochi-strawberry" data-price="18"><img loading="lazy" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=200&q=80" alt="Mochi z truskawką"><div><h3>Mochi z truskawką</h3><p>Deser na zakończenie wizyty.</p></div><div class="pick__side"><p class="price">18 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DANIA SYGNATURALNE -->
+    <section class="section sig" id="signature">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--center"><span class="eyebrow__jp">看板</span> Signature</p>
+          <h2>Dania sygnaturalne</h2>
+          <p class="section__lead">Trzy talerze, które wyróżniają naszą kuchnię.</p>
+        </div>
+        <div class="sig__grid">
+          <article class="sig__item reveal" data-id="sig-dragon" data-price="46"><img loading="lazy" src="https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=900&q=80" alt="Roll Dragon"><div class="sig__body"><span class="badge badge--new">Nowość</span><h3>Roll Dragon</h3><p>Krewetka tempura, awokado i sos unagi.</p><div class="card__bottom"><p class="price">46 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></div></article>
+          <article class="sig__item reveal" data-id="sig-toro" data-price="28"><img loading="lazy" src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=700&q=80" alt="Nigiri toro"><div class="sig__body"><span class="badge">★ Bestseller</span><h3>Nigiri toro</h3><p>Tłusty tuńczyk, sól morska i yuzu.</p><div class="card__bottom"><p class="price">28 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></div></article>
+          <article class="sig__item reveal" data-id="sig-ramen" data-price="52"><img loading="lazy" src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=80" alt="Ramen Wagyu"><div class="sig__body"><span class="badge">★ Bestseller</span><h3>Ramen Wagyu</h3><p>Wołowina wagyu, miso i marynowane jajko.</p><div class="card__bottom"><p class="price">52 zł</p><button class="cart-button" type="button">Dodaj do koszyka</button></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="section menu" id="menu">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--center"><span class="eyebrow__jp">お品書き</span> Świeże każdego dnia</p>
+          <h2>Nasze menu</h2>
+          <div class="divider divider--sm" aria-hidden="true"><span class="divider__line"></span><svg class="divider__flower" aria-hidden="true"><use href="#sakura"/></svg><span class="divider__line"></span></div>
+          <p class="section__lead">Świeże sushi, rolki, ramen, desery i napoje — wybierz swoje ulubione.</p>
+        </div>
+
+        <!-- Поиск по названию блюда (логика в script.js) -->
+        <div class="search reveal" role="search">
+          <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+          <input class="search__input" id="menu-search" type="text" placeholder="Szukaj dania po nazwie…" aria-label="Wyszukiwarka dań" autocomplete="off" spellcheck="false">
+          <button class="search__clear" id="search-clear" type="button" aria-label="Wyczyść wyszukiwanie" hidden>×</button>
+        </div>
+
+        <!-- Кнопки категорий (data-filter должен совпадать с data-category у карточек) -->
+        <div class="filters reveal" role="group" aria-label="Kategorie menu">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Wszystko</button>
+          <button class="filter" type="button" data-filter="sushi" aria-pressed="false">Sushi</button>
+          <button class="filter" type="button" data-filter="rolls" aria-pressed="false">Rolki</button>
+          <button class="filter" type="button" data-filter="ramen" aria-pressed="false">Ramen</button>
+          <button class="filter" type="button" data-filter="desserts" aria-pressed="false">Desery</button>
+          <button class="filter" type="button" data-filter="drinks" aria-pressed="false">Napoje</button>
+          <button class="filter filter--fav" type="button" data-filter="favorites" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+            Ulubione<span class="filter__count" id="fav-count" hidden>0</span>
+          </button>
+        </div>
+
+        <!-- У каждой карточки: data-id (уникальный) и data-price (цена числом) нужны для корзины -->
+        <div class="cards" id="menu-cards">
+
+          <article class="card reveal" data-id="nigiri-salmon" data-price="12" data-category="sushi">
+            <div class="card__photo">
+              <span class="badge ">★ Bestseller</span>
+              <span class="card__tag">Sushi</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=700&q=80" alt="Nigiri z łososiem">
+            </div>
+            <div class="card__body">
+              <h3>Nigiri z łososiem</h3>
+              <p class="card__text">Delikatny łosoś na poduszce z ciepłego ryżu.</p>
+              <div class="card__bottom">
+                <p class="price">12 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="nigiri-tuna" data-price="14" data-category="sushi">
+            <div class="card__photo">
+              <span class="card__tag">Sushi</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=80" alt="Nigiri z tuńczykiem">
+            </div>
+            <div class="card__body">
+              <h3>Nigiri z tuńczykiem</h3>
+              <p class="card__text">Soczysty tuńczyk, kropla sosu sojowego i wasabi.</p>
+              <div class="card__bottom">
+                <p class="price">14 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="roll-philadelphia" data-price="38" data-category="rolls">
+            <div class="card__photo">
+              <span class="card__tag">Rolki</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=700&q=80" alt="Roll Philadelphia">
+            </div>
+            <div class="card__body">
+              <h3>Roll „Philadelphia”</h3>
+              <p class="card__text">Łosoś, serek śmietankowy i świeży ogórek.</p>
+              <div class="card__bottom">
+                <p class="price">38 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="roll-california" data-price="34" data-category="rolls">
+            <div class="card__photo">
+              <span class="badge ">★ Bestseller</span>
+              <span class="card__tag">Rolki</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&w=700&q=80" alt="Roll California">
+            </div>
+            <div class="card__body">
+              <h3>Roll „California”</h3>
+              <p class="card__text">Krab, awokado i złocista ikra tobiko.</p>
+              <div class="card__bottom">
+                <p class="price">34 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="ramen-tonkotsu" data-price="42" data-category="ramen">
+            <div class="card__photo">
+              <span class="card__tag">Ramen</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=80" alt="Ramen tonkotsu">
+            </div>
+            <div class="card__body">
+              <h3>Ramen tonkotsu</h3>
+              <p class="card__text">Intensywny bulion wieprzowy, jajko i makaron.</p>
+              <div class="card__bottom">
+                <p class="price">42 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="ramen-chicken" data-price="38" data-category="ramen">
+            <div class="card__photo">
+              <span class="card__tag">Ramen</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=700&q=80" alt="Ramen z kurczakiem">
+            </div>
+            <div class="card__body">
+              <h3>Ramen z kurczakiem</h3>
+              <p class="card__text">Lekki bulion sojowy, kurczak i szczypiorek.</p>
+              <div class="card__bottom">
+                <p class="price">38 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="mochi-strawberry" data-price="18" data-category="desserts">
+            <div class="card__photo">
+              <span class="card__tag">Deser</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80" alt="Mochi z truskawką">
+            </div>
+            <div class="card__body">
+              <h3>Mochi z truskawką</h3>
+              <p class="card__text">Miękkie ciasto ryżowe ze słodkim nadzieniem.</p>
+              <div class="card__bottom">
+                <p class="price">18 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="dorayaki" data-price="16" data-category="desserts">
+            <div class="card__photo">
+              <span class="badge badge--new">Nowość</span>
+              <span class="card__tag">Deser</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=700&q=80" alt="Dorayaki">
+            </div>
+            <div class="card__body">
+              <h3>Dorayaki</h3>
+              <p class="card__text">Puszyste naleśniczki z delikatną słodką pastą.</p>
+              <div class="card__bottom">
+                <p class="price">16 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Напитки -->
+          <article class="card reveal" data-id="drink-matcha" data-price="16" data-category="drinks">
+            <div class="card__photo">
+              <span class="card__tag">Napój</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=700&q=80" alt="Matcha latte">
+            </div>
+            <div class="card__body">
+              <h3>Matcha latte</h3>
+              <p class="card__text">Delikatna japońska matcha na mleku — gorąca lub mrożona.</p>
+              <div class="card__bottom">
+                <p class="price">16 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="drink-sencha" data-price="10" data-category="drinks">
+            <div class="card__photo">
+              <span class="card__tag">Napój</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=700&q=80" alt="Zielona herbata sencha">
+            </div>
+            <div class="card__body">
+              <h3>Zielona herbata sencha</h3>
+              <p class="card__text">Klasyczna japońska herbata o świeżym, ziołowym aromacie.</p>
+              <div class="card__bottom">
+                <p class="price">10 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="drink-yuzu" data-price="14" data-category="drinks">
+            <div class="card__photo">
+              <span class="badge badge--new">Nowość</span>
+              <span class="card__tag">Napój</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="Lemoniada z yuzu">
+            </div>
+            <div class="card__body">
+              <h3>Lemoniada z yuzu</h3>
+              <p class="card__text">Orzeźwiająca cytrusowa lemoniada z yuzu i miętą.</p>
+              <div class="card__bottom">
+                <p class="price">14 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-id="drink-hojicha" data-price="12" data-category="drinks">
+            <div class="card__photo">
+              <span class="card__tag">Napój</span>
+              <button class="fav-button" type="button" aria-pressed="false" aria-label="Dodaj do ulubionych"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=700&q=80" alt="Mrożona herbata hojicha">
+            </div>
+            <div class="card__body">
+              <h3>Mrożona herbata hojicha</h3>
+              <p class="card__text">Palona zielona herbata o łagodnym orzechowym smaku.</p>
+              <div class="card__bottom">
+                <p class="price">12 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Сообщение, если поиск или фильтр ничего не нашли (показывает script.js) -->
+        <div class="menu-empty" id="menu-empty" hidden>
+          <svg class="menu-empty__icon" aria-hidden="true"><use href="#sakura"/></svg>
+          <p id="menu-empty-text">Nic nie znaleziono.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONSTRUKTOR SUSHI BOXA -->
+    <section class="section box" id="box">
+      <span class="box__kanji" aria-hidden="true">弁当</span>
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--center"><span class="eyebrow__jp">弁当</span> Build your own</p>
+          <h2>Stwórz własny sushi box</h2>
+          <p class="section__lead">Wybierz rozmiar, skomponuj zestaw z ulubionych rolek i dodaj go do koszyka jako jedną pozycję.</p>
+        </div>
+        <div class="box__layout">
+          <div class="box__main">
+            <h3 class="box__step"><span>1</span>Wybierz rozmiar</h3>
+            <div class="box-sizes" id="box-sizes" role="group" aria-label="Rozmiar boxa"></div>
+            <h3 class="box__step"><span>2</span>Skomponuj zestaw</h3>
+            <div class="box-grid" id="box-grid" role="group" aria-label="Produkty w boxie"></div>
+            <div class="box-mini" aria-live="polite"><div><strong id="mini-count">0 / 0</strong><span id="mini-price">0 zł</span></div><a class="button" href="#box-summary">Zobacz podsumowanie</a></div>
+          </div>
+          <aside class="box-sum" id="box-summary" aria-live="polite">
+            <h3>Twój box</h3>
+            <p class="box-sum__count" id="box-count"></p>
+            <div class="box-sum__track"><span id="box-bar"></span></div>
+            <p class="box-sum__status" id="box-status"></p>
+            <p class="box-sum__label">Skład zestawu</p>
+            <ul class="box-sum__list" id="box-list"></ul>
+            <div class="box-sum__total"><span>Razem</span><strong id="box-price">0 zł</strong></div>
+            <button class="button box-sum__add" id="box-add" type="button" disabled>Dodaj box do koszyka</button>
+            <button class="box-sum__reset" id="box-reset" type="button">Wyczyść</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ -->
+    <section class="section offers" id="offers">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow eyebrow--center"><span class="eyebrow__jp">特別</span> W tym tygodniu</p>
+          <h2>Oferty specjalne</h2>
+          <div class="divider divider--sm" aria-hidden="true"><span class="divider__line"></span><svg class="divider__flower" aria-hidden="true"><use href="#sakura"/></svg><span class="divider__line"></span></div>
+          <p class="section__lead">Zestawy, rabaty i oferta tygodnia.</p>
+        </div>
+
+        <!-- Карточки акций: у них тоже есть data-id и data-price, поэтому корзина работает как обычно -->
+        <div class="cards cards--3">
+
+          <article class="card offer reveal" data-id="combo-sakura" data-price="79">
+            <div class="card__photo">
+              <span class="card__tag">Zestaw</span>
+              <span class="offer__discount">−20%</span>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=700&q=80" alt="Zestaw sushi i rolek">
+            </div>
+            <div class="card__body">
+              <h3>Zestaw „Sakura”</h3>
+              <p class="card__text">24 kawałki: nigiri oraz rolki Philadelphia i California. Idealne dla całej ekipy.</p>
+              <div class="card__bottom">
+                <p class="price"><s class="price__old">99 zł</s>79 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card offer reveal" data-id="combo-ramen-mochi" data-price="51">
+            <div class="card__photo">
+              <span class="card__tag">Zestaw</span>
+              <span class="offer__discount">−15%</span>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=700&q=80" alt="Ramen i deser">
+            </div>
+            <div class="card__body">
+              <h3>Ramen + mochi</h3>
+              <p class="card__text">Ramen z kurczakiem, mochi z truskawką i zielona herbata do deseru gratis.</p>
+              <div class="card__bottom">
+                <p class="price"><s class="price__old">60 zł</s>51 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card offer reveal" data-id="week-philadelphia" data-price="29">
+            <div class="card__photo">
+              <span class="card__tag">Oferta tygodnia</span>
+              <span class="offer__discount">−24%</span>
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=700&q=80" alt="Roll Philadelphia">
+            </div>
+            <div class="card__body">
+              <h3>Roll Philadelphia tygodnia</h3>
+              <p class="card__text">Łosoś, serek śmietankowy i ogórek w specjalnej cenie. Tylko w tym tygodniu.</p>
+              <div class="card__bottom">
+                <p class="price"><s class="price__old">38 zł</s>29 zł</p>
+                <button class="cart-button" type="button">Dodaj do koszyka</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="offers__note reveal">Ceny demonstracyjne. Płatności online nie są jeszcze aktywne.</p>
+      </div>
+    </section>
+
+    <!-- О НАС -->
+    <section class="section section--pink about" id="about">
+      <div class="container">
+
+        <div class="about__grid">
+
+          <!-- Текст -->
+          <div class="about__text reveal">
+            <p class="eyebrow"><span class="eyebrow__jp">私たちについて</span> Od 2020 roku</p>
+            <h2>Nasza historia</h2>
+            <p class="about__lead">
+              SAKURA SUSHI narodziła się z miłości do Japonii i jej kulinarnych tradycji.
+            </p>
+            <p>
+              Otworzyliśmy się w 2020 roku, zainspirowani japońską kulturą: dbałością o szczegóły, szacunkiem dla produktu i spokojnym pięknem podania. Fundamentem naszego menu jest tradycyjna sztuka przygotowywania sushi, którą pielęgnujemy z oddaniem.
+            </p>
+            <p>
+              Każdego ranka wybieramy świeże ryby i sezonowe warzywa, gotujemy ryż klasyczną metodą i składamy każde danie ręcznie. Jakość jest dla nas zawsze ważniejsza niż szybkość.
+            </p>
+            <p class="about__sign"><span class="hanko" aria-hidden="true">桜</span>Zespół SAKURA SUSHI</p>
+          </div>
+
+          <!-- Фотографии (расположены несимметрично) -->
+          <div class="about__photos">
+            <figure class="about__photo about__photo--main reveal">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80" alt="Wnętrze japońskiej restauracji">
+            </figure>
+            <figure class="about__photo about__photo--chef reveal">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=600&q=80" alt="Kucharz przygotowuje sushi">
+            </figure>
+            <figure class="about__photo about__photo--dish reveal">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=600&q=80" alt="Eleganckie podanie japońskich dań">
+            </figure>
+          </div>
+
+        </div>
+
+        <!-- Преимущества -->
+        <ul class="features">
+          <li class="feature reveal">
+            <span class="feature__kanji" aria-hidden="true">新鮮</span>
+            <div class="feature__icon">
+              <!-- иконка: листок -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/>
+                <path d="M5 19c3-5 6-8 10-10"/>
+              </svg>
+            </div>
+            <h3>Świeże składniki</h3>
+            <p>Ryby i warzywa trafiają do nas świeże, a ryż gotujemy każdego ranka.</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__kanji" aria-hidden="true">伝統</span>
+            <div class="feature__icon">
+              <!-- иконка: ворота тории -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6c3 1 15 1 18 0"/>
+                <path d="M5 10h14"/>
+                <path d="M7 10v10"/>
+                <path d="M17 10v10"/>
+                <path d="M12 7v3"/>
+              </svg>
+            </div>
+            <h3>Tradycyjne receptury</h3>
+            <p>Klasyczne japońskie techniki i receptury sprawdzone przez czas.</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__kanji" aria-hidden="true">真心</span>
+            <div class="feature__icon">
+              <!-- иконка: сердце -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>
+              </svg>
+            </div>
+            <h3>Robione z miłością</h3>
+            <p>Każde danie przygotowujemy ręcznie, z dbałością o detale.</p>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+  <!-- GALERIA -->
+    <section class="section gallery" id="gallery">
+      <div class="container">
+        <div class="section__head reveal"><p class="eyebrow eyebrow--center"><span class="eyebrow__jp">写真</span> Galeria</p><h2>Galeria</h2></div>
+        <div class="gallery__grid reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80" alt="Sushi na ciemnym talerzu">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80" alt="Wnętrze restauracji">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=800&q=80" alt="Rolki Philadelphia">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=80" alt="Matcha latte">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=800&q=80" alt="Ramen z kurczakiem">
+        </div>
+      </div>
+    </section>
+
+    <!-- OPINIE -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section__head reveal"><p class="eyebrow eyebrow--center"><span class="eyebrow__jp">評判</span> Goście o nas</p><h2>Opinie</h2></div>
+        <div class="reviews__grid">
+          <blockquote class="review reveal"><p>Najświeższe nigiri w Łodzi. Obsługa miła, a podanie jak z obrazka.</p><cite>Anna K.</cite></blockquote>
+          <blockquote class="review reveal"><p>Ramen tonkotsu to czysta przyjemność. Wrócimy w ten weekend!</p><cite>Michał W.</cite></blockquote>
+          <blockquote class="review reveal"><p>Idealne miejsce na kolację we dwoje. Mochi na deser — obowiązkowo.</p><cite>Karolina S.</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="container faq__inner">
+        <div class="section__head reveal"><p class="eyebrow eyebrow--center"><span class="eyebrow__jp">質問</span> Pytania</p><h2>Najczęstsze pytania</h2></div>
+        <details class="faq__item reveal"><summary>Czy mogę zamówić z dostawą?</summary><p>Tak. Dostawa jest bezpłatna przy zamówieniach od 100 zł na terenie Łodzi.</p></details>
+        <details class="faq__item reveal"><summary>Czy macie opcje wegetariańskie?</summary><p>Tak, w menu znajdziesz rolki z awokado i ogórkiem oraz desery bez ryb.</p></details>
+        <details class="faq__item reveal"><summary>Czy trzeba rezerwować stolik?</summary><p>W weekendy polecamy rezerwację telefoniczną pod numerem +48 000 000 000.</p></details>
+        <details class="faq__item reveal"><summary>Jak długo czeka się na zamówienie?</summary><p>Zwykle od 25 do 40 minut, w zależności od pory dnia.</p></details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- КОНТАКТЫ -->
+  <footer class="footer" id="contacts">
+    <span class="footer__watermark" aria-hidden="true">寿司</span>
+    <div class="container">
+
+      <div class="footer__cta reveal"><h2>Zamów sushi na dziś</h2><div class="hero__actions"><a href="#menu" class="button">Zobacz menu</a><a href="tel:+48000000000" class="link-arrow">Zadzwoń do nas</a></div></div>
+
+      <div class="footer__top">
+        <div class="footer__intro reveal">
+          <p class="eyebrow"><span class="eyebrow__jp">連絡先</span> Odwiedź nas</p>
+          <h2>Kontakt</h2>
+          <p class="footer__lead">Zapraszamy w gościnę: ucieszymy się z każdego, kto kocha dobre jedzenie i ciepłą atmosferę.</p>
+        </div>
+
+        <ul class="footer__info reveal">
+          <li class="footer__item">
+            <span class="footer__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+            <div>
+              <h3>Adres</h3>
+              <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Piotrkowska+100+%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener">ul. Piotrkowska 100, Łódź</a></p>
+            </div>
+          </li>
+          <li class="footer__item">
+            <span class="footer__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+            <div>
+              <h3>Godziny otwarcia</h3>
+              <p>Codziennie od 12:00 do 22:00</p>
+            </div>
+          </li>
+          <li class="footer__item">
+            <span class="footer__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.7 4.2-2.2 1.4a11 11 0 0 0 5.4 5.4l1.4-2.2L19 14.5V18a1.5 1.5 0 0 1-1.6 1.5A14.5 14.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></svg></span>
+            <div>
+              <h3>Telefon</h3>
+              <p><a href="tel:+48000000000">+48 000 000 000</a></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="divider divider--light" aria-hidden="true"><span class="divider__line"></span><svg class="divider__flower" aria-hidden="true"><use href="#sakura"/></svg><span class="divider__line"></span></div>
+
+      <div class="footer__main reveal">
+        <div class="footer__brand">
+          <a href="#home" class="logo"><span class="logo__mark" aria-hidden="true">桜</span>SAKURA SUSHI</a>
+          <p>Świeże sushi i japońska kuchnia w samym sercu Łodzi.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Nawigacja w stopce">
+          <p class="footer__label">Nawigacja</p>
+          <ul>
+            <li><a href="#home">Strona główna</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">O nas</a></li>
+            <li><a href="#contacts">Kontakt</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__social">
+          <p class="footer__label">Znajdź nas w sieci</p>
+          <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r="0.6" fill="currentColor"/></svg></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h2.6l.5-3H14V8.4c0-.9.4-1.4 1.5-1.4h1.7V4.3C16.800 4.200 15.900 4 15 4c-2.300 0-3.800 1.400-3.800 3.900V10H8.600v3h2.600v8"/></svg></a>
+            <a href="https://telegram.org/" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 4.5L3.5 11l5.2 2 1.8 5.600 2.800-3.400 4.400 3.300z"/><path d="M8.700 13l8.300-5.500"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 SAKURA SUSHI</p>
+        <p class="footer__jp" aria-hidden="true">ありがとうございます</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- КОРЗИНА: затемнение фона -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+
+  <!-- КОРЗИНА: боковая панель -->
+  <aside class="cart" id="cart" aria-label="Koszyk">
+    <div class="cart__header">
+      <h2 class="cart__title">Koszyk</h2>
+      <button class="cart__close" id="cart-close" type="button" aria-label="Zamknij koszyk">×</button>
+    </div>
+
+    <!-- Сюда JavaScript вставляет товары -->
+    <ul class="cart__list" id="cart-list"></ul>
+
+    <!-- Показывается, когда корзина пуста -->
+    <p class="cart__empty" id="cart-empty">Twój koszyk jest pusty.<br>Dodaj coś pysznego z menu.<br><button class="button button--ghost" id="cart-continue" type="button">Kontynuuj zakupy</button></p>
+
+    <!-- Итоги и кнопка оформления -->
+    <div class="cart__footer" id="cart-footer" hidden>
+      <div class="cart__row">
+        <span>Produkty</span>
+        <span id="cart-items-total">0</span>
+      </div>
+      <div class="cart__row cart__row--total">
+        <span>Razem</span>
+        <span class="cart__total" id="cart-total">0 zł</span>
+      </div>
+      <p class="cart__ship" id="cart-ship"></p>
+      <button class="button cart__checkout" id="checkout" type="button">Przejdź do zamówienia</button>
+    </div>
+  </aside>
+
+  <!-- Всплывающее уведомление -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <script src="builder.js"></script>
+  <script src="cart.js"></script>
+
+</body>
+</html>
